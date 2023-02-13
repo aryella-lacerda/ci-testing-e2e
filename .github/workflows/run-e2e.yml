@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo ${{ github.sha }}
+          echo ${{ toJson(github) }}
 
       - name: Checkout selected branch
         uses: actions/checkout@v3
