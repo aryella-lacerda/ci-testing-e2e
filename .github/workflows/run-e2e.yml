@@ -4,11 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       pull_request_sha: 
+        type: string
         required: true
         description: Test
   workflow_call:
     inputs:
       pull_request_sha: 
+        type: string
         required: true
         description: Test
 
