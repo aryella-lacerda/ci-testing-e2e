@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo ${{ toJson(github) }}
+          echo ${{ inputs.pull_request_sha }}
 
       - name: Checkout selected branch
         uses: actions/checkout@v3
