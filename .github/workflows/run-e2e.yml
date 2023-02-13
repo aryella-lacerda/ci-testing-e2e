@@ -2,6 +2,15 @@ name: Run
 
 on:
   workflow_dispatch:
+    inputs:
+      pull_request_sha: 
+        required: true
+        description: Test
+  workflow_call:
+    inputs:
+      pull_request_sha: 
+        required: true
+        description: Test
 
 jobs:
   run-e2e-tests:
@@ -28,7 +37,8 @@ jobs:
         uses: LouisBrunner/checks-action@v1.6.0
         if: always()
         with:
-          sha: ${{ github.sha }}
+          repo: aryella-lacerda/ci-testing
+          sha: ${{ inputs.pull_request_sha }}
           token: ${{ steps.get_installation_token.outputs.token }}
           name: E2E Tests - Staging
           conclusion: ${{ job.status }}
