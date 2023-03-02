@@ -28,7 +28,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - run: sleep 60s
+      # - run: sleep 60s
 
       - uses: tibdex/github-app-token@v1
         id: get_installation_token
