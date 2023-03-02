@@ -37,13 +37,15 @@ jobs:
           app_id: 293149
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Show results in PR
-        uses: LouisBrunner/checks-action@v1.6.0
-        if: always()
+      - name: Create PR check for E2E Tests
+        uses: actions/github-script@v6
         with:
-          name: E2E Tests - Staging
-          repo: aryella-lacerda/ci-testing
-          details_url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          sha: ${{ inputs.pull_request_sha }}
-          token: ${{ steps.get_installation_token.outputs.token }}
-          conclusion: ${{ job.status }}
+          github-token: ${{ steps.app_token.outputs.token }}
+          script: |
+            github.rest.checks.create({
+              owner: "aryella-lacerda",
+              repo: "ci-testing",
+              name: "E2E Tests - Staging",
+              head_sha: "${{ inputs.pull_request_sha }}",
+              conclusion: "${{ job.status }}"
+            })
